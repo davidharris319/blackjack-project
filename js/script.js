@@ -12,3 +12,61 @@
 * Play again?
 
 */
+
+
+/*----- constants -----*/
+
+const deck = [];
+
+// populate card deck
+let cards = function() {
+    let suits = ['d', 'h', 's', 'c'];
+    for (i = 0; i < suits.length; i++) {
+        let cards = ['A', '02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K'];
+        for (j = 0; j < cards.length; j++) {
+            deck.push(suits[i] + cards[j]);
+        }
+    }
+}
+
+
+/*----- app's state (variables) -----*/
+
+let money = 100;
+let playerCards = [];
+let dealerCards =[];
+let playerBet;
+
+cards();
+moneyElement();
+
+/*----- cached element references -----*/
+
+function moneyElement() {
+    document.getElementById('money-left').innerHTML = money;
+}
+
+/*----- event listeners -----*/
+
+document.querySelector('#dealButton').addEventListener('click', dealHand);
+/*----- functions -----*/
+
+function init() {
+    playerCards = [];
+    dealerCards = [];
+    playerBet();
+}
+
+function dealHand() {
+    let randomCard = [];
+    for (i = 0; i < 4; i++)
+        randomCard[i] = deck.splice(Math.floor(Math.random() * deck.length), 1)
+        if (playerCards[0] === undefined) {
+            playerCards.push(randomCard);
+        } else {
+            dealerCards.push(randomCard);
+        }
+    
+    console.log(playerCards);
+    
+}

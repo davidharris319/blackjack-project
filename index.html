@@ -5,13 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blackjack</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="styles/css/style.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script defer src="js/script.js"></script>
 </head>
 <body>
-    
+    <div class="container">
+        <div class="jumbotron jumbotron-fluid">
+            <h1 class="display-4 text-center">Blackjack</h1>
+            <p class="lead text-center">Come one come all and test your skills at the table.</p> 
+        </div>
+    </div>
+    <main class="container"> 
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card center" style="width: 18rem;">
+                    <img src="styles/images/dealer.png" class="card-img-top" alt="dealer">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Dealer</h5>
+                        <div id="dealerCardOne"></div>
+                        <div id="dealerCardTwo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card center" style="width: 18rem;">
+                    <img src="styles/images/player-card.jpg" class="card-img-top" alt="player">
+                    <div class="card-body">
+                        <h5 class="card-title Player">Player</h5>
+                        <p class="card-text">Playing Money: $<span id="money-left"></span> </p>
+                        <div class="button-group">
+                            <button hidden type="button" class="btn btn-outline-info">Hit</button>
+                            <button hidden type="button" class="btn btn-outline-info">Stand</button>
+                            <form class="form-inline">
+                                <input type="number" class="form-control" id="betAmount" placeholder="Enter Bet Amount">
+                                <button type="button" class="btn btn-outline-info">Bet</button>
+                                <button type="button" class="btn btn-outline-info" id="clearButton">Clear</button>
+                            </form>
+                        </div>
+                        <button type="button" class="btn btn-outline-info" id="dealButton">Deal</button>
+                        <div class="playerCards"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
 </body>
 </html>
