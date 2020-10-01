@@ -8,15 +8,10 @@
   display: flex;
 }
 
-#dealButton {
+#dealButton, #clearButton {
   margin: 10px auto;
-  justify-content: space-around;
-  display: flex;
 }
 
-#clearButton {
-  margin: 10px 0 0 0;
-}
 img {
     height: 230px;
     width: 286px;

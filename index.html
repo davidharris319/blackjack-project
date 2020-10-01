@@ -18,6 +18,7 @@
             <p class="lead text-center">Come one come all and test your skills at the table.</p> 
         </div>
     </div>
+    <blockquote class="blockquote text-center"></blockquote>
     <main class="container"> 
         <div class="row">
             <div class="col-lg-6">
@@ -25,8 +26,7 @@
                     <img src="styles/images/dealer.png" class="card-img-top" alt="dealer">
                     <div class="card-body">
                         <h5 class="card-title text-center">Dealer</h5>
-                        <div id="dealerCardOne"></div>
-                        <div id="dealerCardTwo"></div>
+                        <div class="dealerCards"></div>
                     </div>
                 </div>
             </div>
@@ -36,20 +36,23 @@
                     <div class="card-body">
                         <h5 class="card-title Player">Player</h5>
                         <p class="card-text">Playing Money: $<span id="money-left"></span> </p>
+                        <span id="submittedBet"></span>
                         <div class="button-group">
-                            <button hidden type="button" class="btn btn-outline-info">Hit</button>
-                            <button hidden type="button" class="btn btn-outline-info">Stand</button>
+                            <button type="button" class="btn btn-outline-info game-button" id="hitButton" style="display: none">Hit</button>
+                            <button type="button" class="btn btn-outline-info game-button" id="standButton" style="display: none">Stand</button>
                             <form class="form-inline">
                                 <input type="number" class="form-control" id="betAmount" placeholder="Enter Bet Amount">
-                                <button type="button" class="btn btn-outline-info">Bet</button>
-                                <button type="button" class="btn btn-outline-info" id="clearButton">Clear</button>
+                                <button type="button" class="btn btn-outline-info" id="betButton">Bet</button>
                             </form>
                         </div>
-                        <button type="button" class="btn btn-outline-info" id="dealButton">Deal</button>
+                        <button type="button" class="btn btn-outline-info" id="clearButton" style="display: none">Clear</button>
+                        <button type="button" class="btn btn-outline-info" id="dealButton" style="display: none">Deal</button>
+                        <button type="button" class="btn btn-outline-info" id="playAgain" style="display: none">Play Again?</button>
                         <div class="playerCards"></div>
                     </div>
                 </div>
             </div>
+
         </div>
 
     </main>
