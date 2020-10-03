@@ -1,32 +1,92 @@
-.card {
-    margin: 0 auto;
+* {
+  font-family: 'Times New Roman', Times, serif;
 }
+
+body {
+  background: #00763A;
+}
+
+h1 { 
+  padding-top: 40px;
+  color: #D6A63A;
+}
+
+h3 { 
+  color: white;
+  font-size: 25px;
+}
+
+.dealerCards, .playerCards {
+  height: 5.5em;
+}
+
+.playerCards {
+  margin-bottom: 10px;
+}
+
+img {
+  width: 286px;
+  display: flex;
+  margin: auto;
+  border-radius: 10px;
+}
+
+blockquote {
+  color: white;
+  height: 1.25rem;
+}
+
+p.mb-0.message {
+  font-size: 25px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+    padding: 0;
+    margin: 0 auto;
+    background: #00763a;
+    border: none;
+  }
+
+ .card > p, span, h5 {
+   color: white;
+ } 
+
+ .player-info {
+   margin-bottom: 5px;
+   font-size: 25px;
+   display: flex;
+   justify-content: center;
+ }
+
+ .card-text {
+   color: white;
+ }
 
 .button-group, .form-inline {
-  margin: 0px auto;
-  justify-content: space-around;
   display: flex;
-}
-
-#dealButton {
+  justify-content: center;
   margin: 10px auto;
-  justify-content: space-around;
-  display: flex;
 }
 
-#clearButton {
-  margin: 10px 0 0 0;
+.btn {
+  margin: 0 10px;
 }
-img {
-    height: 230px;
-    width: 286px;
+
+.logo {
+  width: 100%;
+  margin: 0 0 -30px 0;
 }
 
 @charset "UTF-8";
 .playing-card {
   box-sizing: border-box;
   display: inline-block;
-  margin: 5px 5px 50px 5px;
+  margin: 5px 5px 5px 5px;
   cursor: pointer;
   /* Set the card's dimensions, and size it relative to
      it's font size. */
