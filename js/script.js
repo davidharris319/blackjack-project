@@ -1,6 +1,5 @@
 /* Blackjack game flow
 
-* User enters player name.
 * User is asked how much they would like to bet.
 * User enters bet amount.
 * User receives two cards.
@@ -14,7 +13,6 @@
 */
 
 /*----- app's state (variables) -----*/
-
 let money = 100;
 let deck = [];
 let playerCards = [];
@@ -27,9 +25,8 @@ let dealerCount = 0;
 moneyElement();
 
 /*----- cached element references -----*/
-
 function moneyElement() {
-    document.getElementById('money-left').innerHTML = money;
+    document.getElementById('money-left').innerText = `Playing Money: $${money}`;
 }
 
 function betElement() {
@@ -37,7 +34,6 @@ function betElement() {
 }
 
 /*----- event listeners -----*/
-
 document.querySelector('#dealButton').addEventListener('click', dealHand);
 document.querySelector('#betButton').addEventListener('click', makeBet);
 document.querySelector('#clearButton').addEventListener('click', clearBet);
@@ -118,135 +114,72 @@ function dealHand() {
     $('.dealerCards').append(`<div class="playing-card back-blue" id="face-down-card"></div>`);
 
     $('#clearButton, #dealButton, .game-button').toggle();
-    count();
+    updateCounts();
 }
 
-// function getCount(card, count) {
-//     if (card.split('').includes('A') && count < 11) {
-//         count += 11;
-//     } else if (card.split('').includes('A') && count > 11) {
-//         count += 11;
-//     } else if (card.split('').includes('2')) {
-//         count += 2;
-//         console.log(2);
-//     } else if (card.split('').includes('3')) {
-//         count += 3;
-//         console.log(3);
-//     } else if (card.split('').includes('4')) {
-//         count += 4;
-//         console.log(4);
-//     } else if (card.split('').includes('5')) {
-//         count += 5;
-//     } else if (card.split('').includes('6')) {
-//         count += 6;
-//     } else if (card.split('').includes('7')) {
-//         count += 7;
-//     } else if (card.split('').includes('8')) {
-//         count += 8;
-//     } else if (card.split('').includes('9')) {
-//         count += 9;
-//     } else if (card.split('').includes('1')) {
-//         count += 10;
-//     } else if (card.split('').includes('J')) {
-//         count += 10;
-//     } else if (card.split('').includes('Q')) {
-//         count += 10;
-//     } else if (card.split('').includes('K')) {
-//         count += 10;
-//     }
-// }
-
-function getPlayerCount(card) {
-    if (card.split('').includes('A') && playerCount < 11) {
-        playerCount += 11;
-    } else if (card.split('').includes('A') && playerCount > 11) {
-        playerCount += 1;
-    } else if (card.split('').includes('2')) {
-        playerCount += 2;
-    } else if (card.split('').includes('3')) {
-        playerCount += 3;
-    } else if (card.split('').includes('4')) {
-        playerCount += 4;
-    } else if (card.split('').includes('5')) {
-        playerCount += 5;
-    } else if (card.split('').includes('6')) {
-        playerCount += 6;
-    } else if (card.split('').includes('7')) {
-        playerCount += 7;
-    } else if (card.split('').includes('8')) {
-        playerCount += 8;
-    } else if (card.split('').includes('9')) {
-        playerCount += 9;
-    } else if (card.split('').includes('1')) {
-        playerCount += 10;
-    } else if (card.split('').includes('J')) {
-        playerCount += 10;
-    } else if (card.split('').includes('Q')) {
-        playerCount += 10;
-    } else if (card.split('').includes('K')) {
-        playerCount += 10;
-    }
-
-    // Busted, console logs busted line. Toggles out game buttons, toggles in Play Again?
-    if (playerCount > 21) {
-        loseBet();
-        $('blockquote').append(`<p class="mb-0 message">You Busted! You lose $${playerBet}.</p>`);
-        dealerHand();
-        $('.game-button, #playAgain').toggle();
-    }
-}
-
-function getDealerCount(card) {
-    if (card.split('').includes('A') && dealerCount < 11) {
-        dealerCount += 11;
-    } else if (card.split('').includes('A') && dealerCount > 11) {
-        dealerCount += 1;
-    } else if (card.split('').includes('2')) {
-        dealerCount += 2;
-    } else if (card.split('').includes('3')) {
-        dealerCount += 3;
-    } else if (card.split('').includes('4')) {
-        dealerCount += 4;
-    } else if (card.split('').includes('5')) {
-        dealerCount += 5;
-    } else if (card.split('').includes('6')) {
-        dealerCount += 6;
-    } else if (card.split('').includes('7')) {
-        dealerCount += 7;
-    } else if (card.split('').includes('8')) {
-        dealerCount += 8;
-    } else if (card.split('').includes('9')) {
-        dealerCount += 9;
-    } else if (card.split('').includes('1')) {
-        dealerCount += 10;
-    } else if (card.split('').includes('J')) {
-        dealerCount += 10;
-    } else if (card.split('').includes('Q')) {
-        dealerCount += 10;
-    } else if (card.split('').includes('K')) {
-        dealerCount += 10;
-    }
-}
-
-function count() {
-    for (i = 0; i < playerCards.length; i++) {
-        getPlayerCount(playerCards[i])
-    }
-
-    for (i = 0; i < dealerCards.length; i++) {
-        getDealerCount(dealerCards[i]);
-    }
+function updateCounts() {
+    playerCount = getHandValue("player");
+    dealerCount = getHandValue("dealer");
 
     console.log(`player count ${playerCount}`);
     console.log(`dealer count ${dealerCount}`);
+
+    playerBust();
+    console.log("number a");
+}
+
+function getHandValue(playerType) {
+    let hand = playerType === "dealer" ? dealerCards : playerCards;
+    let count = 0;
+    sortAces(hand); 
+
+    hand.forEach(function(card) {
+        if (card.split('').includes('A') && count < 11) {
+            count += 11;
+        } else if (card.split('').includes('A') && count > 11) {
+            count += 1;
+        } else if (card.split('').includes('2')) {
+            count += 2;
+        } else if (card.split('').includes('3')) {
+            count += 3;
+        } else if (card.split('').includes('4')) {
+            count += 4;
+        } else if (card.split('').includes('5')) {
+            count += 5;
+        } else if (card.split('').includes('6')) {
+            count += 6;
+        } else if (card.split('').includes('7')) {
+            count += 7;
+        } else if (card.split('').includes('8')) {
+            count += 8;
+        } else if (card.split('').includes('9')) {
+            count += 9;
+        } else if (card.split('').includes('1')) {
+            count += 10;
+        } else if (card.split('').includes('J')) {
+            count += 10;
+        } else if (card.split('').includes('Q')) {
+            count += 10;
+        } else if (card.split('').includes('K')) {
+            count += 10;
+        }
+    });
+    return count;
+}
+
+function sortAces(hand) {
+    for(i = 0; i < hand.length; i++) {
+        if(hand[i].charAt(hand[i].length - 1) === "A") {
+            hand.push(hand.splice(i, 1) [0]);
+        }
+    }
 }
 
 function playerTakeCard() {
     nextCard = deck.pop()
     playerCards.push(nextCard);
     $('.playerCards').append(`<div class="playing-card ${playerCards[playerCards.length - 1]}"></div>`);
-    getPlayerCount(playerCards[playerCards.length - 1]);
-    console.log(`player count ${playerCount}`);
+    updateCounts();
 }
 
 function stand() {
@@ -256,7 +189,9 @@ function stand() {
 }
 
 function dealerHand() {
+    // reveals face down card
     document.getElementById("face-down-card").className = `playing-card ${dealerCards[1]}`;
+    // dealer takes card if count lower than 17
     if (dealerCount < 17) {
         dealerTakeCard();
     }
@@ -266,7 +201,7 @@ function dealerTakeCard() {
     nextCard = deck.pop()
     dealerCards.push(nextCard);
     $('.dealerCards').append(`<div class="playing-card ${dealerCards[dealerCards.length - 1]}"></div>`);
-    getDealerCount(dealerCards[dealerCards.length - 1]);
+    dealerCount = getHandValue("dealer");
     console.log(`dealer count ${dealerCount}`);
     if (dealerCount < 17) {
         dealerTakeCard();
@@ -287,6 +222,18 @@ function scoreGame() {
         $('blockquote').append(`<p class="mb-0 message">It's a draw. Take your money back.</p>`);
     }
 }
+
+function playerBust() {
+    if (playerCount > 21) {
+        loseBet();
+        $('blockquote').append(`<p class="mb-0 message">You Busted! You lose $${playerBet}.</p>`);
+        dealerHand();
+        $('.game-button, #playAgain').toggle();
+    } else {
+        return;
+    }
+}
+
 function loseBet() {
     money -= playerBet;
     moneyElement();
