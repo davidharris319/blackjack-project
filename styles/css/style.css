@@ -7,7 +7,7 @@ body {
 }
 
 h1 { 
-  padding-top: 40px;
+  padding-top: 25px;
   color: #D6A63A;
 }
 
@@ -33,11 +33,11 @@ img {
 
 blockquote {
   color: white;
-  height: 1.25rem;
+  height: 2.5rem;
 }
 
 p.mb-0.message {
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .row {
