@@ -115,7 +115,7 @@ function dealHand() {
 
     let nextCard = [];
     for (i = 0; i < 2; i++) {
-        nextCard = deck.pop()
+        nextCard = deck.pop();
         playerCards.push(nextCard);
     }
         
@@ -148,10 +148,15 @@ function doubleBet() {
             takeCard();
             if (splitCards.length > 1) {
                 currentHand = "splitHand";
-                scoreGame();
+                if (playerCount < 21) {
+                    dealerHand();
+                    scoreGame();
+                }
             } else if (playerCount <= 21) {
                 dealerHand();
                 scoreGame();
+            } else {
+                return;
             }
         } else {
             splitBet *= 2;
@@ -397,7 +402,6 @@ function loseBet() {
         $('blockquote').append(`<p class="mb-0 message">You're out of money! Click Reset Game to play again!</p>`);
         $('.game-button, #resetButton').toggle();
     } else {
-        console.log("hi");
         $('.game-button, #playAgain').toggle();
     }
 }
@@ -407,7 +411,6 @@ function winBet() {
     money += parseInt(bet);
     moneyElement();
     if (currentHand === "splitHand") {
-        console.log(currentHand);
         currentHand = "playerHand";
         scoreGame();
     } else {
@@ -417,7 +420,6 @@ function winBet() {
 
 function draw() {
     if (currentHand === "splitHand") {
-        console.log(currentHand);
         currentHand = "playerHand";
         scoreGame();
     } else {
@@ -446,6 +448,7 @@ function playAgain() {
 
 function resetGame() {
     $('.form-inline, #resetButton').toggle();
+    $('.game-button, #playAgain').hide();
     money = 100;
     init();
 }

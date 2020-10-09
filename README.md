@@ -33,7 +33,7 @@ Welcome to the Blackjack table. Just like the casino, the goal of the game is to
 
 ### Winning Game Screenshot
 
-![Winning Game](styles/images/game_start.png)
+![Winning Game](styles/images/winning_game.png)
 
 ---
 
